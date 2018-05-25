@@ -20,7 +20,7 @@ module Suspenders
     )
 
     def readme
-      template 'README.md.erb', 'README.md'
+      template "README.md.erb", "README.md"
     end
 
     def gitignore
@@ -43,8 +43,8 @@ module Suspenders
     end
 
     def raise_on_delivery_errors
-      replace_in_file 'config/environments/development.rb',
-        'raise_delivery_errors = false', 'raise_delivery_errors = true'
+      replace_in_file "config/environments/development.rb",
+        "raise_delivery_errors = false", "raise_delivery_errors = true"
     end
 
     def set_test_delivery_method
@@ -91,7 +91,7 @@ module Suspenders
 
       RUBY
 
-      inject_into_class 'config/application.rb', 'Application', config
+      inject_into_class "config/application.rb", "Application", config
     end
 
     def configure_local_mail
@@ -116,27 +116,27 @@ module Suspenders
     end
 
     def setup_asset_host
-      replace_in_file 'config/environments/production.rb',
-        "# config.action_controller.asset_host = 'http://assets.example.com'",
+      replace_in_file "config/environments/production.rb",
+        '# config.action_controller.asset_host = "http://assets.example.com"',
         'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))'
 
       if File.exist?("config/initializers/assets.rb")
-        replace_in_file 'config/initializers/assets.rb',
-          "config.assets.version = '1.0'",
+        replace_in_file "config/initializers/assets.rb",
+          "config.assets.version = "1.0"",
           'config.assets.version = (ENV["ASSETS_VERSION"] || "1.0")'
       end
 
-      config = <<-EOD
-config.public_file_server.headers = {
-    "Cache-Control" => "public, max-age=31557600",
-  }
-      EOD
+      config = <<~CONFIG
+        config.public_file_server.headers = {
+            "Cache-Control" => "public, max-age=31557600",
+          }
+      CONFIG
 
       configure_environment("production", config)
     end
 
     def setup_secret_token
-      template 'secrets.yml', 'config/secrets.yml', force: true
+      template "secrets.yml", "config/secrets.yml", force: true
     end
 
     def disallow_wrapping_parameters
@@ -144,7 +144,7 @@ config.public_file_server.headers = {
     end
 
     def use_postgres_config_template
-      template 'postgresql_database.yml.erb', 'config/database.yml',
+      template "postgresql_database.yml.erb", "config/database.yml",
         force: true
     end
 
@@ -153,7 +153,7 @@ config.public_file_server.headers = {
     end
 
     def replace_gemfile(path)
-      template 'Gemfile.erb', 'Gemfile', force: true do |content|
+      template "Gemfile.erb", "Gemfile", force: true do |content|
         if path
           content.gsub(%r{gem .suspenders.}) { |s| %{#{s}, path: "#{path}"} }
         else
@@ -163,7 +163,7 @@ config.public_file_server.headers = {
     end
 
     def ruby_version
-      create_file '.ruby-version', "#{Suspenders::RUBY_VERSION}\n"
+      create_file ".ruby-version", "#{Suspenders::RUBY_VERSION}\n"
     end
 
     def configure_i18n_for_missing_translations
@@ -172,7 +172,7 @@ config.public_file_server.headers = {
     end
 
     def configure_action_mailer_in_specs
-      copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
+      copy_file "action_mailer.rb", "spec/support/action_mailer.rb"
     end
 
     def configure_time_formats
@@ -200,16 +200,18 @@ config.public_file_server.headers = {
       copy_file "Procfile", "Procfile"
     end
 
+    DEFAULT_DIRECTORIES = %w(
+        app/views/pages
+        spec/lib
+        spec/controllers
+        spec/helpers
+        spec/support/matchers
+        spec/support/mixins
+        spec/support/shared_examples
+    ).freeze
+
     def setup_default_directories
-      [
-        'app/views/pages',
-        'spec/lib',
-        'spec/controllers',
-        'spec/helpers',
-        'spec/support/matchers',
-        'spec/support/mixins',
-        'spec/support/shared_examples'
-      ].each do |dir|
+      DEFAULT_DIRECTORIES.each do |dir|
         empty_directory_with_keep_file dir
       end
     end
@@ -226,15 +228,17 @@ config.public_file_server.headers = {
     def create_deploy_script
       copy_file "bin_deploy", "bin/deploy"
 
-      instructions = <<-MARKDOWN
-
-## Deploying
-
-If you have previously run the `./bin/setup` script,
-you can deploy to staging and production with:
-
-    % ./bin/deploy staging
-    % ./bin/deploy production
+      instructions = <<~MARKDOWN
+        
+        ## Deploying
+        
+        If you have previously run the `./bin/setup` script,
+        you can deploy to staging and production with:
+        
+        ```
+        % ./bin/deploy staging
+        % ./bin/deploy production
+        ```
       MARKDOWN
 
       append_file "README.md", instructions
@@ -273,7 +277,7 @@ you can deploy to staging and production with:
     end
 
     def customize_error_pages
-      meta_tags =<<-EOS
+      meta_tags = <<-EOS
   <meta charset="utf-8" />
   <meta name="ROBOTS" content="NOODP" />
   <meta name="viewport" content="initial-scale=1" />
@@ -283,7 +287,7 @@ you can deploy to staging and production with:
         path = "public/#{page}.html"
         if File.exist?(path)
           inject_into_file path, meta_tags, after: "<head>\n"
-          replace_in_file path, /<!--.+-->\n/, ''
+          replace_in_file path, /<!--.+-->\n/, ""
         end
       end
     end
@@ -311,31 +315,31 @@ you can deploy to staging and production with:
     end
 
     def remove_routes_comment_lines
-      replace_in_file 'config/routes.rb',
+      replace_in_file "config/routes.rb",
         /Rails\.application\.routes\.draw do.*end/m,
         "Rails.application.routes.draw do\nend"
     end
 
     def setup_default_rake_task
-      append_file 'Rakefile' do
-        <<-EOS
-task(:default).clear
-task default: [:spec]
-
-if defined? RSpec
-  task(:spec).clear
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.verbose = false
-  end
-end
-        EOS
+      append_file "Rakefile" do
+        <<-TASKS
+          task(:default).clear
+          task default: [:spec]
+          
+          if defined? RSpec
+            task(:spec).clear
+            RSpec::Core::RakeTask.new(:spec) do |t|
+              t.verbose = false
+            end
+          end
+        TASKS
       end
     end
 
     private
 
     def raise_on_missing_translations_in(environment)
-      config = 'config.action_view.raise_on_missing_translations = true'
+      config = "config.action_view.raise_on_missing_translations = true"
 
       uncomment_lines("config/environments/#{environment}.rb", config)
     end

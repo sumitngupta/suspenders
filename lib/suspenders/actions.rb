@@ -23,7 +23,7 @@ module Suspenders
       inject_into_file(
         "config/environments/#{rails_env}.rb",
         "\n  #{config}",
-        before: "\nend"
+        before: "\nend",
       )
     end
 

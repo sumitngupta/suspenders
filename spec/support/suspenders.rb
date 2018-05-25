@@ -1,5 +1,5 @@
 module SuspendersTestHelpers
-  APP_NAME = "dummy_app"
+  APP_NAME = "dummy_app".freeze
 
   def remove_project_directory
     FileUtils.rm_rf(project_path)
@@ -98,7 +98,7 @@ module SuspendersTestHelpers
   end
 
   def add_fakes_to_path
-    ENV["PATH"] = "#{support_bin}:#{ENV['PATH']}"
+    ENV["PATH"] = "#{support_bin}:#{ENV["PATH"]}"
   end
 
   def project_path
@@ -106,7 +106,7 @@ module SuspendersTestHelpers
   end
 
   def usage_file
-    @usage_path ||= File.join(root_path, "USAGE")
+    @_usage_file ||= File.join(root_path, "USAGE")
   end
 
   private
@@ -116,7 +116,7 @@ module SuspendersTestHelpers
   end
 
   def suspenders_bin
-    File.join(root_path, 'bin', 'suspenders')
+    File.join(root_path, "bin", "suspenders")
   end
 
   def system_rails_bin
@@ -132,7 +132,7 @@ module SuspendersTestHelpers
   end
 
   def root_path
-    File.expand_path('../../../', __FILE__)
+    File.expand_path("../../", __dir__)
   end
 
   def with_env(name, new_value)

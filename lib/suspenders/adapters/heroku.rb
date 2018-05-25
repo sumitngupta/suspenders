@@ -7,8 +7,8 @@ module Suspenders
 
       def set_heroku_remotes
         remotes = <<~SHELL
-          #{command_to_join_heroku_app('staging')}
-          #{command_to_join_heroku_app('production')}
+          #{command_to_join_heroku_app("staging")}
+          #{command_to_join_heroku_app("production")}
 
           git config heroku.remote staging
         SHELL
@@ -71,7 +71,8 @@ module Suspenders
       def create_heroku_pipeline
         pipelines_plugin = `heroku help | grep pipelines`
         if pipelines_plugin.empty?
-          puts "You need heroku pipelines plugin. Run: brew upgrade heroku-toolbelt"
+          puts "You need heroku pipelines plugin."
+          puts "Run: brew upgrade heroku-toolbelt"
           exit 1
         end
 
@@ -90,8 +91,9 @@ module Suspenders
 
       def set_heroku_application_host
         %w(staging production).each do |environment|
+          app_host = "#{heroku_app_name}-#{environment}.herokuapp.com"
           run_toolbelt_command(
-            "config:add APPLICATION_HOST=#{heroku_app_name}-#{environment}.herokuapp.com",
+            "config:add APPLICATION_HOST=#{app_host}",
             environment,
           )
         end
