@@ -1,0 +1,134 @@
+Inspecting 61 files
+...CC.C.C.....CC..CCCC.EC....C......C...........C............
+
+Offenses:
+
+spec/fakes/bin/hub:4:52: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+  File.join("..", "..", "support", "fake_github"), File.dirname(__FILE__))
+                                                   ^^^^^^^^^^^^^^^^^^^^^^
+spec/fakes/bin/hub:4:74: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+  File.join("..", "..", "support", "fake_github"), File.dirname(__FILE__))
+                                                                         ^
+spec/fakes/bin/heroku:4:52: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+  File.join("..", "..", "support", "fake_heroku"), File.dirname(__FILE__))
+                                                   ^^^^^^^^^^^^^^^^^^^^^^
+spec/fakes/bin/heroku:4:74: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+  File.join("..", "..", "support", "fake_heroku"), File.dirname(__FILE__))
+                                                                         ^
+spec/adapters/heroku_spec.rb:64:81: C: Metrics/LineLength: Line is too long. [91/80]
+          with(/pg:backups:schedule DATABASE_URL --at '10:00 UTC' --remote #{remote_name}/)
+                                                                                ^^^^^^^^^^^
+spec/features/new_project_spec.rb:124:7: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+      /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/features/new_project_spec.rb:149:9: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+        /^ +config.action_view.raise_on_missing_translations = true$/
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/features/new_project_spec.rb:199:7: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+      /^ +config.active_job.queue_adapter = :delayed_job$/
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/features/new_project_spec.rb:202:7: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+      /^ +config.active_job.queue_adapter = :inline$/
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/features/new_project_spec.rb:258:81: C: Metrics/LineLength: Line is too long. [81/80]
+    expect(bin_setup).to include("PARENT_APP_NAME=#{app_name.dasherize}-staging")
+                                                                                ^
+spec/support/fake_github.rb:3:51: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+    File.join("..", "..", "tmp", "hub_commands"), File.dirname(__FILE__))
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+spec/support/fake_github.rb:3:73: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+    File.join("..", "..", "tmp", "hub_commands"), File.dirname(__FILE__))
+                                                                        ^
+spec/support/suspenders.rb:101:41: C: Style/StringLiteralsInInterpolation: Prefer single-quoted strings inside interpolations.
+    ENV["PATH"] = "#{support_bin}:#{ENV["PATH"]}"
+                                        ^^^^^^
+spec/support/fake_heroku.rb:3:54: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+    File.join("..", "..", "tmp", "heroku_commands"), File.dirname(__FILE__))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+spec/support/fake_heroku.rb:3:76: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+    File.join("..", "..", "tmp", "heroku_commands"), File.dirname(__FILE__))
+                                                                           ^
+spec/support/fake_heroku.rb:47:81: C: Metrics/LineLength: Line is too long. [93/80]
+    commands_ran =~ /^pipelines:create #{app_name} -a #{app_name}-staging --stage staging/ &&
+                                                                                ^^^^^^^^^^^^^
+spec/support/fake_heroku.rb:48:81: C: Metrics/LineLength: Line is too long. [95/80]
+      commands_ran =~ /^pipelines:add #{app_name} -a #{app_name}-production --stage production/
+                                                                                ^^^^^^^^^^^^^^^
+bin/suspenders:20:33: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+  File.join("..", "templates"), File.dirname(__FILE__))
+                                ^^^^^^^^^^^^^^^^^^^^^^
+bin/suspenders:20:55: C: Layout/MultilineMethodCallBraceLayout: Closing method call brace must be on the line after the last argument when opening brace is on a separate line from the first argument.
+  File.join("..", "templates"), File.dirname(__FILE__))
+                                                      ^
+bin/rspec:9:9: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+require 'pathname'
+        ^^^^^^^^^^
+bin/rspec:10:5: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile',
+    ^^^^^^^^^^^^^^^^
+bin/rspec:10:44: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile',
+                                           ^^^^^^^^^^^^^^^
+bin/rspec:11:3: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+  Pathname.new(__FILE__).realpath)
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+bin/rspec:13:9: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+require 'rubygems'
+        ^^^^^^^^^^
+bin/rspec:14:9: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+require 'bundler/setup'
+        ^^^^^^^^^^^^^^^
+bin/rspec:16:19: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+load Gem.bin_path('rspec-core', 'rspec')
+                  ^^^^^^^^^^^^
+bin/rspec:16:33: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+load Gem.bin_path('rspec-core', 'rspec')
+                                ^^^^^^^
+bin/rake:9:9: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+require 'pathname'
+        ^^^^^^^^^^
+bin/rake:10:5: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
+    ^^^^^^^^^^^^^^^^
+bin/rake:11:3: C: Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.
+  Pathname.new(__FILE__).realpath)
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+bin/rake:13:9: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+require 'rubygems'
+        ^^^^^^^^^^
+bin/rake:14:9: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+require 'bundler/setup'
+        ^^^^^^^^^^^^^^^
+bin/rake:16:19: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+load Gem.bin_path('rake', 'rake')
+                  ^^^^^^
+bin/rake:16:27: C: Style/StringLiterals: Prefer double-quoted strings unless you need single quotes to avoid extra backslashes for escaping.
+load Gem.bin_path('rake', 'rake')
+                          ^^^^^^
+lib/suspenders/app_builder.rb:125:37: E: Lint/Syntax: unexpected token tFLOAT
+(Using Ruby 2.5 parser; configure using TargetRubyVersion parameter, under AllCops)
+          "config.assets.version = "1.0"",
+                                    ^^^
+lib/suspenders/adapters/heroku.rb:10:40: C: Style/StringLiteralsInInterpolation: Prefer single-quoted strings inside interpolations.
+          #{command_to_join_heroku_app("staging")}
+                                       ^^^^^^^^^
+lib/suspenders/adapters/heroku.rb:11:40: C: Style/StringLiteralsInInterpolation: Prefer single-quoted strings inside interpolations.
+          #{command_to_join_heroku_app("production")}
+                                       ^^^^^^^^^^^^
+lib/suspenders/generators/ci_generator.rb:11:81: C: Metrics/LineLength: Line is too long. [82/80]
+      inject_into_file "spec/spec_helper.rb", before: 'SimpleCov.start "rails"' do
+                                                                                ^^
+lib/suspenders/generators/app_generator.rb:12:73: C: Style/StringLiteralsInInterpolation: Prefer single-quoted strings inside interpolations.
+      desc: "Configure for selected database (options: #{DATABASES.join("/")})"
+                                                                        ^^^
+lib/suspenders/generators/app_generator.rb:234:49: C: Style/StringLiteralsInInterpolation: Prefer single-quoted strings inside interpolations.
+      "suspenders #{arguments.map(&:usage).join(" ")} [options]"
+                                                ^^^
+lib/suspenders/generators/app_generator.rb:250:81: C: Metrics/LineLength: Line is too long. [100/80]
+      "Run 'bundle exec honeybadger heroku install' with your API key#{honeybadger_message_suffix}."
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+templates/capybara_webkit.rb:3:28: C: Style/SymbolProc: Pass &:block_unknown_urls as an argument to configure instead of a block.
+Capybara::Webkit.configure do |config| ...
+                           ^^^^^^^^^^^
+
+61 files inspected, 42 offenses detected
